@@ -14,7 +14,12 @@ public class Enemy_Move : MonoBehaviour
         if (hit.distance < 0.8f)
         {
             Flip();
+            if (hit.collider.tag == "Player")
+            {
+                Destroy(hit.collider.gameObject);
+            }
         }
+
 
     }
 
