@@ -29,6 +29,7 @@ public class Player_Score : MonoBehaviour
         {
 
             CountScore();
+            
         }
         if (trig.gameObject.name == "Coin")
         {
@@ -40,5 +41,8 @@ public class Player_Score : MonoBehaviour
     void CountScore()
     {
         playerScore = playerScore + (int)(timeLeft * 10);
+        DataManagement.datamanagement.highScore = playerScore + (int)(timeLeft* 10);
+        DataManagement.datamanagement.SaveData();
+        Debug.Log("High Score"+DataManagement.datamanagement.highScore);
     }
 }
