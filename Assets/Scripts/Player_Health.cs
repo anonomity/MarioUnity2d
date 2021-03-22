@@ -11,13 +11,16 @@ public class Player_Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject.transform.position.y < -6) {
+        if (gameObject.transform.position.y < -6)
+        {
             Die();
         }
-       
+
     }
 
-    void Die () {
+    void Die()
+    {
+        SoundManager.PlaySound("die");
         SceneManager.LoadScene("Prototype_1");
     }
 }

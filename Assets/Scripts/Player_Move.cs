@@ -24,7 +24,6 @@ public class Player_Move : MonoBehaviour
         moveY = Input.GetAxis("Vertical");
         if (Input.GetButtonDown("Jump") && isGrounded == true)
         {
-            Debug.Log("Jump!!!");
             Jump();
         }
         if (gameObject.transform.position.y > -2 && isGrounded == false)
@@ -57,7 +56,7 @@ public class Player_Move : MonoBehaviour
 
     void Jump()
     {
-
+        SoundManager.PlaySound("jump");
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * playerJumpPower);
         isGrounded = false;
     }
@@ -68,10 +67,18 @@ public class Player_Move : MonoBehaviour
         RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up);
         RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down);
 
-        if (rayUp.collider != null && rayUp.distance < distanceToBottomOfPlayer && rayUp.collider.name == "Question")
+        if (rayUp.collider != null && rayUp.distance < distanceToBottomOfPlayer && rayUp.collider.tag == "Question")
         {
             // Destroy(rayUp.collider.gameObject);
+            SoundManager.PlaySound("coin");
+            Player_Score.playerScore += 200;
+            Player_Score.coinCount += 1;
+            rayUp.collider.gameObject.GetComponent<Animator>().SetBool("isHit", true);
+
+
         }
+
+
 
         if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag == "enemy")
         {
@@ -79,7 +86,7 @@ public class Player_Move : MonoBehaviour
             rayDown.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
             rayDown.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
             rayDown.collider.gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
-            rayDown.collider.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            rayDown.collider.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
             rayDown.collider.gameObject.GetComponent<Enemy_Move>().enabled = false;
             //Destroy(rayDown.collider.gameObject);
         }
