@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player_Move : MonoBehaviour
 {
 
@@ -10,6 +11,8 @@ public class Player_Move : MonoBehaviour
     private float moveX;
     private float moveY;
     public bool isGrounded = true;
+
+    public bool isBoxHit = false;
 
     public float distanceToBottomOfPlayer = 1.2f;
     void Update()
@@ -64,32 +67,9 @@ public class Player_Move : MonoBehaviour
 
     void PlayerRaycast()
     {
-        RaycastHit2D rayUp = Physics2D.Raycast(transform.position, Vector2.up);
         RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down);
 
-        if (rayUp.collider != null && rayUp.distance < distanceToBottomOfPlayer && rayUp.collider.tag == "Question")
-        {
-            // Destroy(rayUp.collider.gameObject);
-            SoundManager.PlaySound("coin");
-            Player_Score.playerScore += 200;
-            Player_Score.coinCount += 1;
-            rayUp.collider.gameObject.GetComponent<Animator>().SetBool("isHit", true);
 
-
-        }
-
-
-
-        if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag == "enemy")
-        {
-            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
-            rayDown.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
-            rayDown.collider.gameObject.GetComponent<Rigidbody2D>().gravityScale = 8;
-            rayDown.collider.gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
-            rayDown.collider.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
-            rayDown.collider.gameObject.GetComponent<Enemy_Move>().enabled = false;
-            //Destroy(rayDown.collider.gameObject);
-        }
         if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag != "enemy")
         {
 
