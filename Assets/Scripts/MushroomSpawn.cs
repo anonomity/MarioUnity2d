@@ -2,43 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box_Coin_An : MonoBehaviour
+public class MushroomSpawn : MonoBehaviour
 {
     public bool isHit = false;
     public float rayDistance = 1f;
-    // Start is called before the first frame update
+    public GameObject mushroom;
 
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!isHit)
         {
-            BoxRaycast();
+            MushroomRaycast();
         }
     }
 
-    void BoxRaycast()
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+    }
+    void MushroomRaycast()
     {
         RaycastHit2D rayDown = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.down), rayDistance);
         if (rayDown)
         {
             if (rayDown.collider.tag == "Player")
             {
-                Debug.Log("hit");
-                // Destroy(rayUp.collider.gameObject);
-                SoundManager.PlaySound("coin");
+
                 Player_Score.playerScore += 200;
-                Player_Score.coinCount += 1;
-                GetComponent<Animator>().SetBool("isHit", true);
+
                 isHit = true;
+
+                StartCoroutine(ExecuteAfterTime(5));
+
+                Instantiate(mushroom, new Vector2(rayDown.transform.position.x, rayDown.transform.position.y + 2), Quaternion.identity);
+
+
+
+
 
 
             }
         }
-
-
     }
-
-
 }

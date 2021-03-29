@@ -49,6 +49,5 @@ public class Player_Score : MonoBehaviour
         playerScore = playerScore + (int)(timeLeft * 10);
         DataManagement.datamanagement.highScore = playerScore + (int)(timeLeft * 10);
         DataManagement.datamanagement.SaveData();
-        Debug.Log("High Score" + DataManagement.datamanagement.highScore);
     }
 }
