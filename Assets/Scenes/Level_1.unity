@@ -26058,9 +26058,24 @@ PrefabInstance:
       objectReference: {fileID: 1738888855}
     - target: {fileID: 5338456846625713672, guid: cba3b1a24978248d889b35df3aa0263f,
         type: 3}
+      propertyPath: m_Mass
+      value: 12.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338456846625713672, guid: cba3b1a24978248d889b35df3aa0263f,
+        type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 73b856712909249f382d0c114d9e7164, type: 2}
+    - target: {fileID: 5338456846625713672, guid: cba3b1a24978248d889b35df3aa0263f,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338456846625713672, guid: cba3b1a24978248d889b35df3aa0263f,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 10.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5338456846625713673, guid: cba3b1a24978248d889b35df3aa0263f,
         type: 3}
       propertyPath: m_Name
@@ -26140,6 +26155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Offset.y
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5338456846625713683, guid: cba3b1a24978248d889b35df3aa0263f,
+        type: 3}
+      propertyPath: playerJumpPower
+      value: 1750
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5338456846625713679, guid: cba3b1a24978248d889b35df3aa0263f, type: 3}
