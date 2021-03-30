@@ -7,7 +7,7 @@ public class Player_Move : MonoBehaviour
 {
 
     public int playerSpeed = 10;
-    public int playerJumpPower = 1250;
+    public int playerJumpPower = 1750;
     private float moveX;
     private float moveY;
     public bool isGrounded = true;
@@ -21,36 +21,40 @@ public class Player_Move : MonoBehaviour
     void Update()
     {
         PlayerRaycast();
-        PlayerMove();
+        // if (isGrounded == false)
+        // {
+        //     playerSpeed = 5;
+        // }
+        // else
+        // {
+        //     playerSpeed = 10;
+        // }
+        AnimationChecks();
 
     }
 
+    private void FixedUpdate()
+    {
+        PlayerMove();
+    }
     void PlayerMove()
     {
         moveX = Input.GetAxis("Horizontal");
         moveY = Input.GetAxis("Vertical");
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            if (isGrounded == true && this.gameObject.GetComponent<Rigidbody2D>().velocity.y == 0f)
-            {
 
-                Jump();
 
-            }
+            Jump();
+
+
 
 
         }
 
-        if (isGrounded == false)
-        {
-            playerSpeed = 5;
-        }
-        else
-        {
-            playerSpeed = 10;
-        }
-        AnimationChecks();
+
+
 
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
     }

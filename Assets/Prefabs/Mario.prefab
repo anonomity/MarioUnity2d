@@ -144,13 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5338456846625713673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cabb8a63ed047e2bac5b9ed1c79576, type: 3}
+  m_Script: {fileID: 11500000, guid: 67c2fdeec1b914e5f91a3861c14453be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
-  playerJumpPower: 1250
-  isGrounded: 0
-  distanceToBottomOfPlayer: 1.2
+  hasDied: 0
+  health: 0
 --- !u!114 &5338456846625713683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,11 +158,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5338456846625713673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be271dcb76c5248a1beb0ac19f05e35c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d0951c05f44b422996b96a80b764173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasDied: 0
-  health: 0
+  playerSpeed: 10
+  playerJumpPower: 1750
+  isGrounded: 1
+  isBoxHit: 0
+  isBig: 0
 --- !u!114 &2011549780772668684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,12 +175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5338456846625713673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf12432c3542c4c1c8de4afee6d35ac1, type: 3}
+  m_Script: {fileID: 11500000, guid: c29f5b9af24044a68a4b3e86c47235cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScore: 0
   timeLeftUI: {fileID: 0}
   playerScoreUI: {fileID: 0}
+  playerCoinUI: {fileID: 0}
 --- !u!95 &5338456846625713682
 Animator:
   serializedVersion: 3
