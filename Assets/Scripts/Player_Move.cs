@@ -15,7 +15,6 @@ public class Player_Move : MonoBehaviour
 
     public bool isBig = false;
 
-    public static float vectorDownDistance = 1f;
 
 
     public static float distanceToBottomOfPlayer = 1f;
@@ -96,7 +95,7 @@ public class Player_Move : MonoBehaviour
 
     void PlayerRaycast()
     {
-        RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, vectorDownDistance);
+        RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, distanceToBottomOfPlayer);
 
 
         if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag != "enemy")

@@ -28,7 +28,7 @@ public class MushroomSpawn : MonoBehaviour
         {
             if (rayDown.collider.tag == "Player")
             {
-
+                GetComponent<Animator>().SetBool("isHit", true);
                 Player_Score.playerScore += 200;
 
                 isHit = true;

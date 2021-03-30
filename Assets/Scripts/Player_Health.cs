@@ -21,6 +21,6 @@ public class Player_Health : MonoBehaviour
     void Die()
     {
         SoundManager.PlaySound("die");
-        SceneManager.LoadScene("Prototype_1");
+        SceneManager.LoadScene("Level_1");
     }
 }

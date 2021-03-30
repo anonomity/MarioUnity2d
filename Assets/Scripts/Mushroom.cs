@@ -16,10 +16,8 @@ public class Mushroom : MonoBehaviour
     {
         if (trig.gameObject.tag == "Player")
         {
-
             trig.transform.localScale = new Vector2(1f, 1f) * 1.1f;
             Player_Move.distanceToBottomOfPlayer = 1.2f;
-            Player_Move.vectorDownDistance = 1.2f;
             Destroy(this.gameObject);
 
         }
