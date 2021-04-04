@@ -15,6 +15,7 @@ public class Enemy_Move : MonoBehaviour
         DeathRayCast();
     }
 
+
     void DeathRayCast()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.TransformDirection(Vector2.up), distanceToBottomOfPlayer);
@@ -22,8 +23,8 @@ public class Enemy_Move : MonoBehaviour
         {
             if (hit.collider.tag == "Player")
             {
-                hit.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);
+                hit.collider.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.up * 5f;
+                GetComponent<Rigidbody2D>().velocity = Vector2.right * 10f;
                 GetComponent<Rigidbody2D>().gravityScale = 8;
                 GetComponent<Rigidbody2D>().freezeRotation = false;
                 GetComponent<CapsuleCollider2D>().enabled = false;

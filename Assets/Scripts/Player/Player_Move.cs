@@ -28,24 +28,26 @@ public class Player_Move : MonoBehaviour
 
     void Update()
     {
-        PlayerRaycast();
+
 
 
         AnimationChecks();
 
-    }
-
-    private void FixedUpdate()
-    {
         moveX = Input.GetAxis("Horizontal");
         moveY = Input.GetAxis("Vertical");
-
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             Jump();
         }
+    }
 
-        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+    private void FixedUpdate()
+    {
+
+
+        PlayerRaycast();
+
     }
 
 
@@ -69,7 +71,7 @@ public class Player_Move : MonoBehaviour
             GetComponent<Animator>().SetBool("IsJumping", false);
         }
 
-        if (moveX != 0 && gameObject.transform.position.y < -1.01)
+        if (moveX != 0)
         {
             GetComponent<Animator>().SetBool("IsRunning", true);
         }
@@ -91,16 +93,29 @@ public class Player_Move : MonoBehaviour
     void PlayerRaycast()
     {
         RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, distanceToBottomOfPlayer);
+        RaycastHit2D rayRight = Physics2D.Raycast(transform.position, Vector2.right, 0.8f);
+        if (rayRight.collider != null && rayRight.collider.tag == "enemy")
+        {
+
+            Player_Health.Die();
+        }
+        if (rayDown.collider != null && rayDown.collider.tag == "ground")
+        {
+            isGrounded = true;
+        }
 
 
         if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag != "enemy")
         {
-
             isGrounded = true;
-
         }
-
+        if (rb2d.velocity.y > 0)
+        {
+            isGrounded = false;
+        }
     }
+
+
 }
 
 
