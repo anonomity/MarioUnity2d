@@ -24,7 +24,7 @@ public class Player_Score : MonoBehaviour
 
         if (timeLeft < 0.1f)
         {
-            SceneManager.LoadScene("Prototype_1");
+            SceneManager.LoadScene("Level_1");
         }
     }
 

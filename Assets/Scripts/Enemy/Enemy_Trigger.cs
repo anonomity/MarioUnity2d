@@ -9,7 +9,6 @@ public class Enemy_Trigger : MonoBehaviour
     {
         if (trig.gameObject.tag == "Player")
         {
-            Debug.Log("hit");
 
             trig.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 1000);
             GetComponent<Rigidbody2D>().AddForce(Vector2.right * 200);

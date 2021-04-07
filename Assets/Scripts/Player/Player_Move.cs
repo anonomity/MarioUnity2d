@@ -16,6 +16,8 @@ public class Player_Move : MonoBehaviour
 
     public bool isBig = false;
 
+    public static bool endGame = false;
+
     Rigidbody2D rb2d;
     string buttonPressed;
 
@@ -40,8 +42,21 @@ public class Player_Move : MonoBehaviour
         {
             Jump();
         }
+        if (endGame)
+        {
+
+            EndGame();
+        }
     }
 
+    private void EndGame()
+    {
+        gameObject.GetComponent<Animator>().enabled = true;
+        gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+
+        endGame = false;
+        // gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(3.5f, 0) * 2.5f;
+    }
     private void FixedUpdate()
     {
 
@@ -93,19 +108,16 @@ public class Player_Move : MonoBehaviour
     void PlayerRaycast()
     {
         RaycastHit2D rayDown = Physics2D.Raycast(transform.position, Vector2.down, distanceToBottomOfPlayer);
-        RaycastHit2D rayRight = Physics2D.Raycast(transform.position, Vector2.right, 0.8f);
-        if (rayRight.collider != null && rayRight.collider.tag == "enemy")
-        {
 
-            Player_Health.Die();
-        }
+
+
         if (rayDown.collider != null && rayDown.collider.tag == "ground")
         {
             isGrounded = true;
         }
 
 
-        if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer && rayDown.collider.tag != "enemy")
+        if (rayDown.collider != null && rayDown.distance < distanceToBottomOfPlayer)
         {
             isGrounded = true;
         }

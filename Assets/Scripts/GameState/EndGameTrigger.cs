@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class EndGameTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -16,10 +15,6 @@ public class EndGameTrigger : MonoBehaviour
         }
     }
 
-    public void LoadNextLevel(int x)
-    {
-        SceneManager.LoadScene(x);
-    }
     void OnTriggerEnter2D(Collider2D trig)
     {
         if (trig.gameObject.tag == "Player")
@@ -35,22 +30,34 @@ public class EndGameTrigger : MonoBehaviour
             //Animate
 
 
-            // Do the scene of Mario walking into the castle
-
-            //go to the next level
-            // LoadNextLevel(1);
-
         }
+
+    }
+
+
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
 
     }
     //Push Mario down until he gets to y = -1.1
     void downThePole()
     {
-        mario.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1.5f) * 1.5f;
 
-        if (mario.transform.position.y < -1.6f)
+        if (mario.transform.position.y < -0.9)
         {
+
             downPole = false;
+            mario.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            mario.transform.Translate(1f, 0, 0);
+            StartCoroutine(ExecuteAfterTime(2));
+            mario.GetComponent<SpriteRenderer>().flipX = true;
+            Player_Move.endGame = true;
+        }
+        else
+        {
+
+            mario.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1.5f) * 1.5f;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box_Coin_An : MonoBehaviour
+public class NewBoxCollider : MonoBehaviour
 {
     public float rayDistance = 1f;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class Box_Coin_An : MonoBehaviour
             SoundManager.PlaySound("coin");
             Player_Score.playerScore += 200;
             Player_Score.coinCount += 1;
-            trigger.GetComponent<Animator>().SetBool("isHit", true);
+            GetComponent<Animator>().SetBool("isHit", true);
 
 
         }
