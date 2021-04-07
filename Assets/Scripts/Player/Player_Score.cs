@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class Player_Score : MonoBehaviour
 
 {
-    private float timeLeft = 120;
-    public static int playerScore = 0;
+    public static float timeLeft = 120;
+    public static float playerScore = 0;
     public static int coinCount = 0;
     public GameObject timeLeftUI;
     public GameObject playerScoreUI;
 
     public GameObject playerCoinUI;
-
+    public static bool normalSub = true;
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
+
         timeLeftUI.gameObject.GetComponent<Text>().text = ("" + (int)timeLeft);
-        playerScoreUI.gameObject.GetComponent<Text>().text = ("" + playerScore);
+        playerScoreUI.gameObject.GetComponent<Text>().text = ("" + (int)playerScore);
         playerCoinUI.gameObject.GetComponent<Text>().text = ("" + coinCount);
 
         if (timeLeft < 0.1f)
@@ -27,15 +27,22 @@ public class Player_Score : MonoBehaviour
             SceneManager.LoadScene("Level_1");
         }
     }
-
-    void OnTriggerEnter2D(Collider2D trig)
+    private void FixedUpdate()
     {
-        if (trig.gameObject.name == "EndLevel")
+        if (normalSub)
         {
 
-            CountScore();
-
+            timeLeft -= Time.deltaTime;
         }
+        else
+        {
+            timeLeft -= Time.deltaTime * 30;
+            playerScore += Time.deltaTime * 30;
+        }
+    }
+    void OnTriggerEnter2D(Collider2D trig)
+    {
+
         if (trig.gameObject.name == "Coin")
         {
             playerScore += 10;
@@ -44,10 +51,5 @@ public class Player_Score : MonoBehaviour
         }
     }
 
-    void CountScore()
-    {
-        playerScore = playerScore + (int)(timeLeft * 10);
-        DataManagement.datamanagement.highScore = playerScore + (int)(timeLeft * 10);
-        DataManagement.datamanagement.SaveData();
-    }
+
 }

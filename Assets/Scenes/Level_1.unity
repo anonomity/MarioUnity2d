@@ -1068,6 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 561d1f99306de46a5a9f8a60291a8b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeLeft: 0
 --- !u!61 &265179257
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -25667,6 +25668,7 @@ GameObject:
   - component: {fileID: 894866652}
   - component: {fileID: 894866655}
   - component: {fileID: 894866656}
+  - component: {fileID: 894866657}
   m_Layer: 0
   m_Name: EndLevel
   m_TagString: Untagged
@@ -25798,6 +25800,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   downPole: 0
+--- !u!95 &894866657
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894866651}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 515e0d6cc0308487abad9218616bfef4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &929954939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27961,7 +27982,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.88, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &2030523036
 Transform:
@@ -28344,12 +28365,12 @@ PrefabInstance:
     - target: {fileID: 5338456846625713677, guid: cba3b1a24978248d889b35df3aa0263f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 183.55
+      value: 184.2
       objectReference: {fileID: 0}
     - target: {fileID: 5338456846625713677, guid: cba3b1a24978248d889b35df3aa0263f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.67
+      value: 3.6
       objectReference: {fileID: 0}
     - target: {fileID: 5338456846625713677, guid: cba3b1a24978248d889b35df3aa0263f,
         type: 3}

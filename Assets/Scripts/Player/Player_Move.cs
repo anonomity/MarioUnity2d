@@ -22,7 +22,7 @@ public class Player_Move : MonoBehaviour
     string buttonPressed;
 
     public static float distanceToBottomOfPlayer = 1f;
-
+    public static bool moveAlone = false;
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -47,6 +47,16 @@ public class Player_Move : MonoBehaviour
 
             EndGame();
         }
+        if (moveAlone)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+
+
+
+            GetComponent<Animator>().SetBool("IsRunning", true);
+
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(3.5f, 0) * 1.5f;
+        }
     }
 
     private void EndGame()
@@ -54,8 +64,9 @@ public class Player_Move : MonoBehaviour
         gameObject.GetComponent<Animator>().enabled = true;
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
 
+
         endGame = false;
-        // gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(3.5f, 0) * 2.5f;
+        moveAlone = true;
     }
     private void FixedUpdate()
     {
