@@ -11,7 +11,7 @@ public class Player_Move : MonoBehaviour
 
     private float moveX;
     private float moveY;
-    public bool isGrounded = true;
+
     public bool isBoxHit = false;
 
     public bool isBig = false;
@@ -23,25 +23,39 @@ public class Player_Move : MonoBehaviour
 
     public static float distanceToBottomOfPlayer = 1f;
     public static bool moveAlone = false;
+    public float distanceToBottomOfPlayer2 = 1f;
+    public LayerMask groundLayer;
+    [Header("Collision")]
+    public float linearDrag = 1f;
+
+    public float gravity = 1f;
+    public float fallMultiplier = 5f;
+    public bool isGrounded = true;
     private void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
+    private void FixedUpdate()
+    {
 
+        PlayerRaycast();
+
+    }
     void Update()
     {
 
-
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, distanceToBottomOfPlayer2, groundLayer);
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Jump();
+        }
 
         AnimationChecks();
 
         moveX = Input.GetAxis("Horizontal");
         moveY = Input.GetAxis("Vertical");
         gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerSpeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            Jump();
-        }
+
         if (endGame)
         {
 
@@ -49,41 +63,52 @@ public class Player_Move : MonoBehaviour
         }
         if (moveAlone)
         {
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
 
 
-
-            GetComponent<Animator>().SetBool("IsRunning", true);
+            Debug.Log("moveAlone");
 
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(3.5f, 0) * 1.5f;
+            gameObject.GetComponent<Animator>().enabled = true;
+            GetComponent<Animator>().SetBool("IsRunning", true);
         }
     }
 
     private void EndGame()
     {
-        gameObject.GetComponent<Animator>().enabled = true;
-        gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        Debug.Log("EndGame");
 
+        gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
 
         endGame = false;
         moveAlone = true;
     }
-    private void FixedUpdate()
-    {
 
 
-        PlayerRaycast();
-
-    }
-
-
+    // void ModifyPhysics()
+    // {
+    //     if (isGrounded)
+    //     {
+    //         rb2d.gravityScale = 0f;
+    //     }
+    //     else
+    //     {
+    //         rb2d.gravityScale = gravity;
+    //         linearDrag = linearDrag * 0.15f;
+    //         if (rb2d.velocity.y < 0)
+    //         {
+    //             rb2d.gravityScale = gravity * fallMultiplier;
+    //         }
+    //         else if (rb2d.velocity.y > 0 && !Input.GetButton("Jump"))
+    //         {
+    //             rb2d.gravityScale = gravity * (fallMultiplier / 2);
+    //         }
+    //     }
+    // }
 
     void Jump()
     {
-        // SoundManager.PlaySound("jump");
-        float jumpVelocity = 30f;
-        rb2d.velocity = Vector2.up * jumpVelocity;
-        isGrounded = false;
+        rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
+        rb2d.AddForce(Vector2.up * 15f, ForceMode2D.Impulse);
 
     }
     void AnimationChecks()

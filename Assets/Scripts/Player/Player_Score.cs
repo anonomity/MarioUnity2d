@@ -13,8 +13,24 @@ public class Player_Score : MonoBehaviour
     public GameObject playerScoreUI;
 
     public GameObject playerCoinUI;
+    private bool sound = true;
+    private bool stop = false;
     public static bool normalSub = true;
+    public bool Win = true;
     // Update is called once per frame
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        if (sound)
+        {
+            sound = false;
+            SoundManager.PlaySound("winLevel");
+        }
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("Level_2");
+        // timeLeft = 200;
+
+
+    }
     void Update()
     {
 
@@ -24,21 +40,35 @@ public class Player_Score : MonoBehaviour
 
         if (timeLeft < 0.1f)
         {
-            SceneManager.LoadScene("Level_1");
+            FlagUp.flagUp = true;
+            stop = true;
+            Player_Move.moveAlone = false;
+            Player_Move.endGame = false;
+            normalSub = true;
+
+            StartCoroutine(ExecuteAfterTime(3));
+
+
         }
+        // if (timeLeft < 0.1f)
+        // {
+        //     NextLevelTrigger.doneCount = true;
+        // }
     }
     private void FixedUpdate()
     {
-        if (normalSub)
+        if (normalSub && !stop)
         {
 
             timeLeft -= Time.deltaTime;
         }
-        else
+        else if (timeLeft > 0.01 && !stop)
         {
+
             timeLeft -= Time.deltaTime * 30;
-            playerScore += Time.deltaTime * 30;
+            playerScore += Time.deltaTime * 60;
         }
+
     }
     void OnTriggerEnter2D(Collider2D trig)
     {
